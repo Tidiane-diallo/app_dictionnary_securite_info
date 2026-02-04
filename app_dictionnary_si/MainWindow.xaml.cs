@@ -27,7 +27,7 @@ namespace app_dictionnary_si
             InitializeComponent();
         }
 
-        class Recup_data
+        public class Recup_data
         {
             public int Longeurmin { get; set; }
             public int Longeurmax { get; set; }
@@ -59,9 +59,15 @@ namespace app_dictionnary_si
 
         private void btnGenerer_Click(object sender, RoutedEventArgs e)
         {
+            Recup_data recup_Data = new Recup_data();
 
-			Recup_data recup_Data = new Recup_data();
+			controle_saisie(recup_Data);
+			
+		}
 
+
+        public void controle_saisie(Recup_data recup_Data)
+        {
 			// controle de saisie
 			if (!int.TryParse(txtLongueurMin.Text, out int min))
 			{
