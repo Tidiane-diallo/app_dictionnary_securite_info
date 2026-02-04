@@ -5,8 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app_dictionnary_si"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Générateur de Dictionnaire" Height="638" Width="1082"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<!-- Titre -->
+		<Border Grid.Row="0" Background="#2196F3" CornerRadius="5" Padding="15" Margin="0,0,0,20">
+			<TextBlock Text="Générateur de Dictionnaire de Mots de Passe" 
+                       FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Foreground="White"/>
+		</Border>
+
+		<!-- Longueur minimale et maximale -->
+		<GroupBox Grid.Row="1" Header="Longueur des mots de passe" Margin="0,0,0,15"
+                  BorderBrush="#2196F3" BorderThickness="2">
+			<Grid Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0" Grid.Column="0" Text="Longueur minimale :" Margin="0,0,0,5" FontWeight="SemiBold"/>
+				<TextBox Grid.Row="1" Grid.Column="0" x:Name="txtLongueurMin" Width="100" HorizontalAlignment="Left" 
+                         Text="1" Padding="5" BorderBrush="#2196F3"/>
+
+				<TextBlock Grid.Row="0" Grid.Column="1" Text="Longueur maximale :" Margin="0,0,0,5" FontWeight="SemiBold"/>
+				<TextBox Grid.Row="1" Grid.Column="1" x:Name="txtLongueurMax" Width="100" HorizontalAlignment="Left" 
+                         Text="3" Padding="5" BorderBrush="#2196F3"/>
+			</Grid>
+		</GroupBox>
+
+		<!-- Caractères permis -->
+		<GroupBox Grid.Row="2" Header="Caractères permis dans le dictionnaire" Margin="0,0,0,15"
+                  BorderBrush="#4CAF50" BorderThickness="2">
+			<StackPanel Margin="10">
+				<CheckBox x:Name="chkMinuscules" Content="Alphabet minuscule (a-z)" Margin="0,5" FontWeight="SemiBold"/>
+				<CheckBox x:Name="chkMajuscules" Content="Alphabet majuscule (A-Z)" Margin="0,5" FontWeight="SemiBold"/>
+				<CheckBox x:Name="chkChiffres" Content="Chiffres (0-9)" Margin="0,5" FontWeight="SemiBold"/>
+				<CheckBox x:Name="chkSpeciaux" Content="Caractères spéciaux (# $ % ? &amp; *)" Margin="0,5" FontWeight="SemiBold"/>
+
+				<Separator Margin="0,10" Background="#4CAF50"/>
+
+				<StackPanel Orientation="Horizontal" Margin="0,5">
+					<TextBlock Text="Ou saisie personnalisée :" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="SemiBold"/>
+					<TextBox x:Name="txtCaracteresPersonnalises" Width="200" Padding="5" BorderBrush="#4CAF50" ToolTip="Ex: abc123"/>
+				</StackPanel>
+			</StackPanel>
+		</GroupBox>
+
+		<!-- Fichier de sortie -->
+		<GroupBox Grid.Row="3" Header="Fichier de sortie" Margin="0,0,0,15"
+                  BorderBrush="#FF9800" BorderThickness="2">
+			<Grid Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+				<TextBox Grid.Column="0" x:Name="txtCheminFichier" Margin="0,0,10,0" Text="c:\pass.txt" 
+                         Padding="5" BorderBrush="#FF9800"/>
+				<Button Grid.Column="1" x:Name="btnParcourir" Content="Parcourir..." Width="100"
+                        Background="#FF9800" Foreground="White" FontWeight="SemiBold" Cursor="Hand" Click="btnParcourir_Click"/>
+			</Grid>
+		</GroupBox>
+
+		<!-- Boutons et progression -->
+		<StackPanel Grid.Row="4">
+			<Button x:Name="btnGenerer" Content="Générer le dictionnaire" Height="40" FontSize="14" 
+                    Background="#4CAF50" Foreground="White" FontWeight="Bold" Cursor="Hand" Click="btnGenerer_Click"/>
+			<TextBlock x:Name="txtProgression" Text="" HorizontalAlignment="Center" Margin="0,5,0,0" 
+                       FontWeight="SemiBold" Foreground="#666666"/>
+		</StackPanel>
+	</Grid>
 </Window>

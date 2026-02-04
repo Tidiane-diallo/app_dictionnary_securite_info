@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,5 +26,67 @@ namespace app_dictionnary_si
         {
             InitializeComponent();
         }
-    }
+
+        class Recup_data
+        {
+            public int Longeurmin { get; set; }
+            public int Longeurmax { get; set; }
+            public bool chkMinus { get; set; }
+            public bool chkMajus { get; set;}
+            public bool chkChiffre { get; set; }
+            public bool chkSpec { get; set; }
+
+            public String txtCharPersonnalises { get; set; }
+
+            //public String txtCheminFile { get; set; }
+		}
+
+
+        private void btnParcourir_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Fichier texte (*.txt)|*.txt",
+                DefaultExt = ".txt",
+                FileName = "pass.txt"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                txtCheminFichier.Text = saveFileDialog.FileName;
+            }
+		}
+
+        private void btnGenerer_Click(object sender, RoutedEventArgs e)
+        {
+
+			Recup_data recup_Data = new Recup_data();
+
+			// controle de saisie
+			if (!int.TryParse(txtLongueurMin.Text, out int min))
+			{
+				MessageBox.Show("La longueur minimale doit être un nombre entier.",
+								"Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			// controle de saisie
+			if (!int.TryParse(txtLongueurMax.Text, out int max))
+			{
+				MessageBox.Show("La longueur maximale doit être un nombre entier.",
+								"Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			if (min <= 0 || max <= 0 || min > max)
+			{
+				MessageBox.Show("Vérifiez que Min > 0 et Min ≤ Max.",
+								"Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+				return;
+			}
+
+			recup_Data.Longeurmin = min;
+			recup_Data.Longeurmax = max;
+		}
+	}
 }
