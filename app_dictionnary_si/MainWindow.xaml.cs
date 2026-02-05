@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -39,6 +40,11 @@ namespace app_dictionnary_si
             public String txtCharPersonnalises { get; set; }
 
             //public String txtCheminFile { get; set; }
+
+            public void generateurDic()
+            {
+
+            }
 		}
 
 
@@ -55,18 +61,20 @@ namespace app_dictionnary_si
             {
                 txtCheminFichier.Text = saveFileDialog.FileName;
             }
-		}
+            
+
+        }
 
         private void btnGenerer_Click(object sender, RoutedEventArgs e)
         {
             Recup_data recup_Data = new Recup_data();
 
-			controle_saisie(recup_Data);
+			recup_saisie(recup_Data);
 			
 		}
 
 
-        public void controle_saisie(Recup_data recup_Data)
+        public void recup_saisie(Recup_data recup_Data)
         {
 			// controle de saisie
 			if (!int.TryParse(txtLongueurMin.Text, out int min))
@@ -91,8 +99,74 @@ namespace app_dictionnary_si
 				return;
 			}
 
-			recup_Data.Longeurmin = min;
+            if (chkMinuscules.IsChecked == false && chkMajuscules.IsChecked == false &&
+                chkChiffres.IsChecked == false && chkSpeciaux.IsChecked == false &&
+                string.IsNullOrEmpty(txtCaracteresPersonnalises.Text))
+            {
+                MessageBox.Show("Veuillez sélectionner au moins un type de caractère ou saisir des caractères personnalisés.",
+                                "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+
+
+            recup_Data.Longeurmin = min;
 			recup_Data.Longeurmax = max;
-		}
-	}
+            recup_Data.chkMinus = chkMinuscules.IsChecked == true;
+            recup_Data.chkMajus = chkMajuscules.IsChecked == true;
+            recup_Data.chkChiffre = chkChiffres.IsChecked == true;
+            recup_Data.chkSpec = chkSpeciaux.IsChecked == true;
+            recup_Data.txtCharPersonnalises = txtCaracteresPersonnalises.Text;
+        }
+
+        private void UpdateStatut(object sender, RoutedEventArgs e)
+        {
+            if (txtCaracteresPersonnalises == null) return;
+
+            bool isStandardOptionSelected = PnlCaracteres.Children
+                .OfType<CheckBox>()
+                .Any(cb => cb.IsChecked == true);
+
+            if (isStandardOptionSelected)
+            {
+                txtCaracteresPersonnalises.IsEnabled = false;
+                txtCaracteresPersonnalises.Clear();
+
+                txtCaracteresPersonnalises.Background = Brushes.LightGray;
+            }
+            else
+            {
+                txtCaracteresPersonnalises.IsEnabled = true;
+                txtCaracteresPersonnalises.Background = Brushes.White;
+            }
+        }
+        
+
+
+        private void txtCaracteresPersonnalises_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+            if (txtCaracteresPersonnalises != null)
+            {
+                chkMinuscules.IsEnabled = false;
+                chkMajuscules.IsEnabled = false;
+                chkChiffres.IsEnabled = false;
+                chkSpeciaux.IsEnabled = false;
+            }
+
+            if (string.IsNullOrEmpty(txtCaracteresPersonnalises.Text))
+            {
+                chkMinuscules.IsEnabled = true;
+                chkMajuscules.IsEnabled = true;
+                chkChiffres.IsEnabled = true;
+                chkSpeciaux.IsEnabled = true;
+            }
+
+
+
+        }
+    }
 }
+
+
+
+

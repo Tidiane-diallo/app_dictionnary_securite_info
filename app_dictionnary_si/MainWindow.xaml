@@ -48,24 +48,28 @@
 		</GroupBox>
 
 		<!-- Caractères permis -->
-		<GroupBox Grid.Row="2" Header="Caractères permis dans le dictionnaire" Margin="0,0,0,15"
-                  BorderBrush="#4CAF50" BorderThickness="2">
-			<StackPanel Margin="10">
-				<CheckBox x:Name="chkMinuscules" Content="Alphabet minuscule (a-z)" Margin="0,5" FontWeight="SemiBold"/>
-				<CheckBox x:Name="chkMajuscules" Content="Alphabet majuscule (A-Z)" Margin="0,5" FontWeight="SemiBold"/>
-				<CheckBox x:Name="chkChiffres" Content="Chiffres (0-9)" Margin="0,5" FontWeight="SemiBold"/>
-				<CheckBox x:Name="chkSpeciaux" Content="Caractères spéciaux (# $ % ? &amp; *)" Margin="0,5" FontWeight="SemiBold"/>
+        <GroupBox Grid.Row="2" Header="Caractères permis dans le dictionnaire" Margin="0,0,0,15"
+          BorderBrush="#4CAF50" BorderThickness="2">
+            <StackPanel x:Name="PnlCaracteres" 
+                Margin="10" 
+                CheckBox.Checked="UpdateStatut" 
+                CheckBox.Unchecked="UpdateStatut">
 
-				<Separator Margin="0,10" Background="#4CAF50"/>
+                <CheckBox x:Name="chkMinuscules" Content="Alphabet minuscule (a-z)" Margin="0,5" FontWeight="SemiBold"/>
+                <CheckBox x:Name="chkMajuscules" Content="Alphabet majuscule (A-Z)" Margin="0,5" FontWeight="SemiBold"/>
+                <CheckBox x:Name="chkChiffres" Content="Chiffres (0-9)" Margin="0,5" FontWeight="SemiBold"/>
+                <CheckBox x:Name="chkSpeciaux" Content="Caractères spéciaux (# $ % ? &amp; *)" Margin="0,5" FontWeight="SemiBold"/>
 
-				<StackPanel Orientation="Horizontal" Margin="0,5">
-					<TextBlock Text="Ou saisie personnalisée :" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="SemiBold"/>
-					<TextBox x:Name="txtCaracteresPersonnalises" Width="200" Padding="5" BorderBrush="#4CAF50" ToolTip="Ex: abc123"/>
-				</StackPanel>
-			</StackPanel>
-		</GroupBox>
+                <Separator Margin="0,10" Background="#4CAF50"/>
 
-		<!-- Fichier de sortie -->
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <TextBlock Text="Ou saisie personnalisée :" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="SemiBold"/>
+                    <TextBox x:Name="txtCaracteresPersonnalises" Width="200" Padding="5" BorderBrush="#4CAF50" ToolTip="Ex: abc123" TextChanged="txtCaracteresPersonnalises_TextChanged_1"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Fichier de sortie -->
 		<GroupBox Grid.Row="3" Header="Fichier de sortie" Margin="0,0,0,15"
                   BorderBrush="#FF9800" BorderThickness="2">
 			<Grid Margin="10">
