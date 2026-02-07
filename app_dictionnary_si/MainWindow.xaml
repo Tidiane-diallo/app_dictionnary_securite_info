@@ -79,7 +79,7 @@
 				</Grid.ColumnDefinitions>
 
 				<TextBox Grid.Column="0" x:Name="txtCheminFichier" Margin="0,0,10,0" Text="c:\pass.txt" 
-                         Padding="5" BorderBrush="#FF9800"/>
+                         Padding="5" BorderBrush="#FF9800" TextChanged="txtCheminFichier_TextChanged"/>
 				<Button Grid.Column="1" x:Name="btnParcourir" Content="Parcourir..." Width="100"
                         Background="#FF9800" Foreground="White" FontWeight="SemiBold" Cursor="Hand" Click="btnParcourir_Click"/>
 			</Grid>
@@ -88,7 +88,7 @@
 		<!-- Boutons et progression -->
 		<StackPanel Grid.Row="4">
 			<Button x:Name="btnGenerer" Content="Générer le dictionnaire" Height="40" FontSize="14" 
-                    Background="#4CAF50" Foreground="White" FontWeight="Bold" Cursor="Hand" Click="btnGenerer_Click"/>
+                    Background="#4CAF50" Foreground="White" FontWeight="Bold" Cursor="Hand" Click="btnGenerer_Click" IsEnabled="False"/>
 			<TextBlock x:Name="txtProgression" Text="" HorizontalAlignment="Center" Margin="0,5,0,0" 
                        FontWeight="SemiBold" Foreground="#666666"/>
 		</StackPanel>
