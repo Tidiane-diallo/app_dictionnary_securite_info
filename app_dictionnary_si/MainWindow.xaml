@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app_dictionnary_si"
         mc:Ignorable="d"
-        Title="Générateur de Dictionnaire" Height="638" Width="1082"
+        Title="Générateur de Dictionnaire" Height="720" Width="1080"
         WindowStartupLocation="CenterScreen"
         Background="#F5F5F5">
 
@@ -87,10 +87,13 @@
 
 		<!-- Boutons et progression -->
 		<StackPanel Grid.Row="4">
-			<Button x:Name="btnGenerer" Content="Générer le dictionnaire" Height="40" FontSize="14" 
-                    Background="#4CAF50" Foreground="White" FontWeight="Bold" Cursor="Hand" Click="btnGenerer_Click" IsEnabled="False"/>
-			<TextBlock x:Name="txtProgression" Text="" HorizontalAlignment="Center" Margin="0,5,0,0" 
-                       FontWeight="SemiBold" Foreground="#666666"/>
+			<ProgressBar x:Name="ProgressBar" Height="20" Margin="0,0,0,10" Foreground="#4CAF50"/>
+			<TextBlock x:Name="LblStats" Text="Mots: 0 | Vitesse: 0/sec | Temps: 00:00"
+                       FontFamily="Consolas" HorizontalAlignment="Center"/>
+			<TextBlock x:Name="LblTotal" Text="Total estimé: 0" FontStyle="Italic"
+                       Foreground="Gray" Margin="0,5,0,15" HorizontalAlignment="Center"/>
+			<Button x:Name="btnGenerer" Content="Générer le dictionnaire" Height="40" FontSize="14"
+                    Background="#4CAF50" Foreground="White" FontWeight="Bold" Cursor="Hand" Click="btnGenerer_Click"/>
 		</StackPanel>
 	</Grid>
 </Window>
